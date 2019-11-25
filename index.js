@@ -3,7 +3,7 @@ const prefiler = require('./src/prefiler')
 let data = require('./src/data')
 
 let configObject = {
-    target: data, //arrayobjects
+    target: "data", //arrayobjects
     querys: [{
         id: 'KingstonTownCode1',
         name: 'license-profession',
