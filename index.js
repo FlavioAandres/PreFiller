@@ -4,14 +4,13 @@ let data = require('./src/data')
 
 let configObject = {
     target: data, //arrayobjects
-    querys: [{
+    querys: [{ // one query by each prefill
         id: 'KingstonTownCode1',
         name: 'license-profession',
         newKey: 'professionQuery',
         paths: ['license.state', 'license.profession'],
         call: async function () {
             return { name: "andres" }
-
         }
     }, {
         id: 'KingstonTownCode1',
