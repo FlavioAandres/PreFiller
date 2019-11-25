@@ -69,6 +69,46 @@ const profiler = {
         profiler._storeQuerys(Querys)
 
         return objects
+    },
+    _getData: (externalQuery) => {
+        if (!_store) throw new Error('No store found, initialize the app properly')
+        if (!externalQuery) throw new Error('Query should be passed in args')
+
+        const { name, id } = externalQuery
+        // delete externalQuery.name
+        // delete externalQuery.id
+
+        const response = _store.find(({ query: queryStored }) => {
+            let isValid = queryStored.id === id && queryStored.name === name;
+            const properties = externalQuery ? Object.keys(externalQuery) : [];
+            if (isValid) {
+                if (
+                    properties &&
+                    queryStored &&
+                    properties.length > 0 &&
+                    properties.length === Object.keys(queryStored).length
+                ) {
+                    for (const property of properties) {
+                        if (
+                            queryStored[property] !== externalQuery[property]
+                        ) {
+                            isValid = false;
+                            break;
+                        }
+                    }
+                } else {
+                    console.log('descarted by firstvalidation');
+                    console.log(properties);
+                    console.log(properties.length);
+                    console.log(queryStored);
+                    console.log(Object.keys(queryStored).length);
+
+                    isValid = false;
+                }
+            }
+            return isValid;
+        });
+        return response ? response.response : null;
     }
 }
 
@@ -78,5 +118,6 @@ module.exports = {
         if (!_config_file) throw new Error('config file is missing, please initialize again this process')
         if (!_store) throw new Error('Something bad happened... internal store is missing')
         return _store
-    }
+    },
+    getData: profiler._getData
 }
