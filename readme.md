@@ -12,9 +12,9 @@
    
 ## Methods 
 
-* profiler.config(<ConfigObject>): this method initialize the profiller and returns the target object with all querys inside of them
+* profiler.config(< ConfigObject >): this method initialize the profiller and returns the target object with all querys inside of them
 
-* profiler.getData(<QueryObject>): Returns the response gived by async call config Object
+* profiler.getData(< QueryObject >): Returns the response gived by async call config Object
 
 * profiler.getStore(): Return the entire data inside the profiler
 
