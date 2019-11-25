@@ -1,7 +1,7 @@
 #Ussage
 
 ## Config Object 
- * target: Object to map where is the profil data 
+ * target: Array of object to map where is the profil data 
  * querys: Prefilers
    * id: "unique identifier"
    * name: "name or type"
@@ -10,6 +10,15 @@
    * call: async function to get data, send query as param
    
    
+## Methods 
+
+* profiler.config(<ConfigObject>): this method initialize the profiller and returns the target object with all querys inside of them
+
+* profiler.getData(<QueryObject>): Returns the response gived by async call config Object
+
+* profiler.getStore(): Return the entire data inside the profiler
+
+
 ## Example
    
    
@@ -18,7 +27,7 @@
 let configObject = {
     target: data, //arrayobjects
     querys: [{
-        id: 'KingstonTownCode1',
+        id: 'hashedid-xTfU9LNn',
         name: 'license-profession',
         newKey: 'professionQuery',
         paths: ['license.state', 'license.profession'],
@@ -27,7 +36,7 @@ let configObject = {
 
         }
     }, {
-        id: 'KingstonTownCode1',
+        id: 'hashedid-xTfU9LNn',
         name: 'state-query',
         newKey: 'stateQuery',
         paths: ['license.state'],
@@ -38,8 +47,12 @@ let configObject = {
 }
 
 const start = async () => {
-    const result = await prefiler.config(configObject)
-    console.log(prefiler.getStore())
+    const data = await prefiler.config(configObject)
+    let resultProfiler = prefiler.getData(data[0].professionQuery)
+    console.log(resultProfiler);
+
+    //output: { name: "andres" }
+
 }
 ```
 start()
